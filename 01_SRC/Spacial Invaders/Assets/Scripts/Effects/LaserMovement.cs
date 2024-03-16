@@ -8,10 +8,13 @@ public class LaserMovement : MonoBehaviour
 public float speed = 5f;
 public Rigidbody2D rb;
 
+public GameManager gameManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb.velocity = transform.up * speed;
 
 
@@ -31,6 +34,7 @@ public Rigidbody2D rb;
         {
             attack.gameObject.SetActive(false);
             gameObject.SetActive(false);
+            gameManager.ShowWinScreen();
         }
 
         

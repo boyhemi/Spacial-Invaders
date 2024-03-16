@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LaserCollector : MonoBehaviour
 {
+
+    [SerializeField]
+    GameObject EnemyLaser;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,7 @@ public class LaserCollector : MonoBehaviour
         {
             other.gameObject.SetActive(false);
         }
-        else if (other.gameObject.tag == "EnemyLaser")
+        else if (other.CompareTag("EnemyLaser"))
         {
             other.gameObject.SetActive(false);
         }

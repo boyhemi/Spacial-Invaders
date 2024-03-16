@@ -78,17 +78,17 @@ public class GameController : MonoBehaviour
 			var laser = lasers[i];
 			laser.transform.Translate(Vector3.down * LASER_SPEED * Time.deltaTime);
 			
-
-			if (laser.transform.position.y < MIN_Y_BOUNDS)
+			if (lasers.Count > 5)
 			{
 				// As the laser is not on screen anymore, remove the laser from the scene
 				lasers.RemoveAt(i);
-
+				laser.SetActive(false);
+				laser.transform.position = enemyObject.transform.position;
 				i--;
 			}
 			else
 			{
-				lasers[i].SetActive(true);
+				laser.SetActive(true);
 			}
 		}
 	}
