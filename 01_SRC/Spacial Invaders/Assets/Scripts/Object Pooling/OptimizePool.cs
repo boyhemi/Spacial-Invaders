@@ -36,7 +36,7 @@ public class OptimizePool : MonoBehaviour
             }
         }
 
-        GameObject obj = Instantiate(poolingObject);
+        GameObject obj = Instantiate(poolingObject, parentObject.transform);
         obj.SetActive(false);
         pooledObjects.Add(obj);
         return obj;

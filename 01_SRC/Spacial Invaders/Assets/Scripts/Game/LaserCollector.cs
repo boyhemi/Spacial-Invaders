@@ -15,11 +15,15 @@ public class LaserCollector : MonoBehaviour
     {
 
         
-        
+    
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("EnemyLaser") || other.CompareTag("PlayerLaser"))
+        if (other.CompareTag("PlayerLaser"))
+        {
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.tag == "EnemyLaser")
         {
             other.gameObject.SetActive(false);
         }

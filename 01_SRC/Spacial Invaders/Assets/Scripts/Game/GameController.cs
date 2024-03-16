@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
 
 	[SerializeField]
 	public OptimizePool laserPool;
+	[SerializeField]
+	GameManager gameManager;
 
 	const float MIN_FIRE_TIME = 0.2f;
 	const float MAX_FIRE_TIME = 0.8f;
@@ -42,7 +44,8 @@ public class GameController : MonoBehaviour
 	{
 		// Known issue: Enemy object is fixed in location, lasers will only fire -- RESOLVED
 		// from the same x position
-		var laser = Instantiate(laserObject, enemyObject.transform);
+		laserObject = laserPool.GetPooledObject();
+		var laser = laserObject;
 		lasers.Add(laser);
 
 		// Fire another laser after a random time has passed
@@ -80,9 +83,25 @@ public class GameController : MonoBehaviour
 			{
 				// As the laser is not on screen anymore, remove the laser from the scene
 				lasers.RemoveAt(i);
-				Destroy(laser);
+
 				i--;
+			}
+			else
+			{
+				lasers[i].SetActive(true);
 			}
 		}
 	}
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if (enemyObject.gameObject.tag == "Player")
+		{
+			gameManager.ShowGameOverScreen();
+		}
+	}
+
+
+
+
 }
